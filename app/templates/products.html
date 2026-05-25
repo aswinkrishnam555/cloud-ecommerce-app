@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">🛍️ Our Products</h2>
+<div class="row">
+  {% for item in products %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.description }}</p>
+        <p class="fw-bold text-success">₹{{ item.price }}</p>
+        <p class="text-muted">Stock: {{ item.stock }}</p>
+        <a href="/cart/add/{{ item.id }}" class="btn btn-primary w-100">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p>No products available yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

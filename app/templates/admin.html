@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">⚙️ Admin Dashboard</h2>
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card text-white bg-primary">
+      <div class="card-body">
+        <h5>Total Users</h5>
+        <h2>{{ users|length }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-success">
+      <div class="card-body">
+        <h5>Total Products</h5>
+        <h2>{{ products|length }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-warning">
+      <div class="card-body">
+        <h5>Total Orders</h5>
+        <h2>{{ orders|length }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="/admin/product/add" class="btn btn-success mb-3">+ Add Product</a>
+<table class="table table-bordered">
+  <thead><tr><th>ID</th><th>Name</th><th>Price</th><th>Stock</th><th>Action</th></tr></thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>₹{{ product.price }}</td>
+      <td>{{ product.stock }}</td>
+      <td><a href="/admin/product/delete/{{ product.id }}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
