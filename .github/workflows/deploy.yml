@@ -9,15 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: 15.206.94.233
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          port: 22
           script: |
             cd ~/cloud-ecommerce-app
             git pull origin main
             sudo fuser -k 5000/tcp || true
+            sleep 2
             nohup python3 run.py > app.log 2>&1 &
-            echo "Deployed!"
-            
+            echo "Done!"
